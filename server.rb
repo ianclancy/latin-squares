@@ -15,6 +15,6 @@ post "/size-input" do
 end
 
 get "/enter-values/:square_size" do
-  @square_size = params[:square_size]
+  @square_size = params[:square_size].to_i
   erb :enter_values
 end

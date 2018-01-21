@@ -1,1 +1,10 @@
 <p>Please fill in the <%= @square_size %> x <%= @square_size %> square:</p>
+
+<% @square_size.times do %>
+  <% @square_size.times do %>
+    <input type="text" class="value-input" maxlength="1"/>
+  <% end %>
+  <br>
+<% end %>
+
+<a href="/size-input">New Square</a>
