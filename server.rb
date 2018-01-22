@@ -1,5 +1,6 @@
-require 'sinatra'
-require 'pry'
+require "sinatra"
+require "pry"
+require "csv"
 
 get "/" do
   redirect "/size-input"
@@ -9,20 +10,32 @@ get "/size-input" do
   erb :size_input
 end
 
-post "/size-input" do
-  square_size = params["square_size"]
-  redirect "/enter-values/#{square_size}"
-end
 
 get "/enter-values/:square_size" do
   @square_size = params[:square_size].to_i
   erb :enter_values
 end
 
-post "/enter-values/:square_size" do
-  redirect "/result"
+get "/result" do
+  @values_list = CSV.read("square_values.csv").last
+  erb :result
 end
 
-get "/result" do
-  erb :result
+post "/size-input" do
+  square_size = params["square_size"]
+  redirect "/enter-values/#{square_size}"
+end
+
+post "/enter-values/:square_size" do
+  number_of_values = params[:square_size].to_i ** 2
+  values_list = []
+  i = 0
+  while i < number_of_values
+    values_list << params[i.to_s]
+    i += 1
+  end
+  CSV.open("square_values.csv", "a") do |csv|
+    csv.puts(values_list)
+  end
+  redirect "/result"
 end
