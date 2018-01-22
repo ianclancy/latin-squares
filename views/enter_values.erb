@@ -1,10 +1,15 @@
 <p>Please fill in the <%= @square_size %> x <%= @square_size %> square:</p>
 
-<% @square_size.times do %>
+<form action="/enter-values/<%= @square_size %>" method="post">
   <% @square_size.times do %>
-    <input type="text" class="value-input" maxlength="1"/>
+    <% column_index = 0 %>
+    <% @square_size.times do %>
+      <input type="text" class="value-input" maxlength="1"/>
+      <% column_index += 1 %>
+    <% end %>
+    <br>
   <% end %>
-  <br>
-<% end %>
+  <input type="submit" value="Check Latin Square" id="check">
+</form>
 
 <a href="/size-input">New Square</a>
