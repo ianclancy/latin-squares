@@ -18,3 +18,11 @@ get "/enter-values/:square_size" do
   @square_size = params[:square_size].to_i
   erb :enter_values
 end
+
+post "/enter-values/:square_size" do
+  redirect "/result"
+end
+
+get "/result" do
+  erb :result
+end
