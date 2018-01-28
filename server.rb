@@ -1,6 +1,7 @@
 require "sinatra"
 require "pry"
 require "csv"
+require_relative "models/square"
 
 get "/" do
   redirect "/size-input"
@@ -18,6 +19,7 @@ end
 
 get "/result" do
   @values_list = CSV.read("square_values.csv").last
+  @square = Square.new(@values_list)
   erb :result
 end
 
