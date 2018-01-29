@@ -18,4 +18,8 @@ class Square
   def length
     Math.sqrt(@values.length).to_i
   end
+
+  def result
+    true
+  end
 end
