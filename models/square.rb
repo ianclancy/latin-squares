@@ -3,6 +3,7 @@ class Square
   def initialize(values)
     @values = values
     @rows = []
+    @columns = []
     value_index = 0
     @values.each do |value|
       row_index = value_index / size
@@ -10,7 +11,11 @@ class Square
       if column_index == 0
         @rows[row_index] = []
       end
+      if row_index == 0
+        @columns[column_index] = []
+      end
       @rows[row_index] << value
+      @columns[column_index] << value
       value_index += 1
     end
   end
@@ -34,11 +39,25 @@ class Square
   end
 
   def result
-    if correct_number_of_values? && unique_rows?
+    if correct_number_of_values? && unique_rows? && unique_columns?
       return true
     else
       return false
     end
+  end
+
+  def unique_columns?
+    @columns.each do |column|
+      unique_column_values = []
+      column.each do |value|
+        if unique_column_values.include?(value)
+          return false
+        else
+          unique_column_values << value
+        end
+      end
+    end
+    return true
   end
 
   def unique_rows?
