@@ -1,4 +1,5 @@
 class Square
+  attr_reader :rows
   def initialize(values)
     @values = values
     @rows = []

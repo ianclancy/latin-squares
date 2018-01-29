@@ -19,6 +19,7 @@ end
 get "/result" do
   @values_list = CSV.read("square_values.csv").last
   @square = Square.new(@values_list)
+  @rows = @square.rows
   erb :result
 end
 
