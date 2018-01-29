@@ -18,32 +18,44 @@ class Square
       @columns[column_index] << value
       value_index += 1
     end
-  end
-
-  def size
-    Math.sqrt(@values.length).to_i
+    @errors = []
   end
 
   def correct_number_of_values?
-    unique_values = []
-    @values.each do |value|
-      if !unique_values.include?(value)
-        unique_values << value
-      end
-    end
-    if unique_values.length == size
+    if number_of_values == size
       return true
     else
       return false
     end
   end
 
+  def error_message
+    if number_of_values != size
+      error_string = "there are a total of #{number_of_values} values used, but there should be #{size}."
+    elsif !unique_rows?
+      error_string = "the values in each row are not unique."
+    elsif !unique_columns?
+      error_string = "the values in each column are not unique."
+    else
+      error_string = ""
+    end
+    return error_string
+  end
+
+  def number_of_values
+    return unique_values.length
+  end
+
   def result
-    if correct_number_of_values? && unique_rows? && unique_columns?
+    if error_message.empty?
       return true
     else
       return false
     end
+  end
+
+  def size
+    return Math.sqrt(@values.length).to_i
   end
 
   def unique_columns?
@@ -72,5 +84,15 @@ class Square
       end
     end
     return true
+  end
+
+  def unique_values
+    list_of_values = []
+    @values.each do |value|
+      if !list_of_values.include?(value)
+        list_of_values << value
+      end
+    end
+    return list_of_values
   end
 end

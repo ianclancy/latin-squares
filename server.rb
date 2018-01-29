@@ -21,6 +21,7 @@ get "/result" do
   @square = Square.new(@values_list)
   @rows = @square.rows
   @latin_square = @square.result
+  @error_message = @square.error_message
   erb :result
 end
 
