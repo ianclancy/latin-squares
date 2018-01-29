@@ -34,10 +34,24 @@ class Square
   end
 
   def result
-    if correct_number_of_values?
+    if correct_number_of_values? && unique_rows?
       return true
     else
       return false
     end
+  end
+
+  def unique_rows?
+    @rows.each do |row|
+      unique_row_values = []
+      row.each do |value|
+        if unique_row_values.include?(value)
+          return false
+        else
+          unique_row_values << value
+        end
+      end
+    end
+    return true
   end
 end
