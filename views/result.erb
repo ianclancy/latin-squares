@@ -1,3 +1,6 @@
-<% @values_list.each do |value| %>
-  <%= value %>
+<% @rows.each do |row| %>
+  <% row.each do |value| %>
+    <%= value %>
+  <% end %>
+  <br>
 <% end %>
